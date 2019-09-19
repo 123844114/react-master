@@ -1,0 +1,13 @@
+*{
+    padding:0;
+    margin: 0;
+    list-style: none;
+}
+
+.dialog{
+    width: 150px;
+    height: 100px;
+    background: red;
+    user-select: none;
+    position: absolute;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="root"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    //context  上下文对象
+        const Context = React.createContext(); //类
+        // console.log(Context.Provider);  //提供者
+        // console.log(Context.Consumer);  //使用者
+
+        class Son extends React.Component{
+            render(){
+                return <div className="son">
+                        <Context.Consumer>
+                            {
+                                (data)=>{
+                                    console.log(data);
+                                    return (<div>
+                                        <p>{data.name}</p>
+                                        <button onClick={()=>{data.setClassName('1610C')}}>点击修改班级名称</button>
+                                    </div>)
+                                }
+                            }
+                        </Context.Consumer>
+                    </div>
+            }
+        }
+
+        class Parent extends React.Component{
+            render(){
+                return <div className="parent">
+                        <Son />
+                    </div>
+            }
+        }
+        
+        class Wrap extends React.Component{
+            state = {
+                name:'1610A'
+            }
+            render(){
+                return <div className="wrap">
+                        <Context.Provider value={{...this.state,setClassName:this.setClassName.bind(this)}}>
+                            <Parent />
+                        </Context.Provider>
+                    </div>
+            }
+            setClassName(name){
+                this.setState({name})
+            }
+        }
+
+        ReactDOM.render(<Wrap/>,document.querySelector('.root'));
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../day1/js/react.js"></script>
+    <script src="../day1/js/reactdom.js"></script>
+    <script src="../day1/js/babel.js"></script>
+    <script type="text/babel">
+        class Min extends React.Component{
+            render(){
+                console.log(this);
+                return <div>
+                        <h2 ref="h2">min</h2>
+                        <button onClick={()=>{
+                            ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+                        }}>卸载</button>
+                    </div>
+            }
+            componentDidMount() {
+                console.log('111111',ReactDOM.findDOMNode(this));
+                console.log()
+            }
+            componentWillUnmount(){
+                console.log('remove');
+            }
+        }
+        class Index extends React.Component{
+            state = {
+                data:[{
+                    color:'red',
+                    title:'不及格',
+                    radius:50
+                },{
+                    color:'skyblue',
+                    title:'中等',
+                    radius:100
+                },{
+                    color:'yellow',
+                    title:'满分',
+                    radius:210
+                }]
+            }
+            render(){
+                return <div>
+                        <canvas ref={(dom)=>{
+                            if(dom){this.draw(dom)}
+                        }}></canvas>
+                        <audio ref={(audio)=>{
+                            console.dir(audio);
+                        }}></audio>
+                        <Min ref={(component)=>{
+                            console.log(component);
+                            console.log(component.refs.h2);
+                        }}/>
+                        <button onClick={()=>{
+                            this.update()
+                        }}>点击更新成绩</button>
+                    </div>
+            }
+            draw(dom){
+                const ctx = dom.getContext('2d');
+                let {data} = this.state;
+                console.log(ctx,data);
+            }
+            update(){
+                let data = [];
+                for(let i=0;i<3;i++){
+                    data.push({
+                        color:`rgb(${this.getRandom(0,255)},${this.getRandom(0,255)},${this.getRandom(0,255)})`,
+                        radius:this.getRandom(100,200)
+                    })
+                }
+                this.setState({data});
+            }
+            getRandom(min,max){
+                return Math.floor(Math.random()*(max-min+1)+min)
+            }
+        }
+        
+        ReactDOM.render(<Index/>,document.getElementById('app'));
+    </script>
+</body>
+</html>

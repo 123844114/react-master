@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap"></div>
+    <div id="app"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        //有状态组件
+        //es5 createClass
+        //es6
+        let {Component} = React;
+        class Head extends Component{
+            state = {
+                list:[
+                        {
+                            'title':'一级',
+                            id:0
+                        },
+                        {
+                            'title':'二级',
+                            id:1
+                        }
+                ]
+            }
+            consoleMes = ()=>{
+                return <b>1111</b>
+            }
+            constructor(props){
+                super(props);
+                //state 状态 组件
+                this.state = {
+                    list:[
+                        {
+                            'title':'一级',
+                            id:0
+                        },
+                        {
+                            'title':'二级',
+                            id:1
+                        }
+                    ]
+                }
+            }
+            render(){
+                let {list} = this.state;  //{list}={list}
+                return <div>
+                        <header>{this.props.text}</header>
+                        <ul>
+                            {
+                                list.map(item=><li key={item.id}>{item.title}</li>)
+                            }
+                        </ul>
+                        {this.consoleMes()}
+                    </div>
+            }
+        }
+        
+
+        //无状态组件
+        // function Head(){
+        //     return <header>1610A</header>
+        // };
+        //  console.log(React.createElement(Head));
+        // console.log(<Head />);  //组件
+        //
+        ReactDOM.render(<Head text="1610A" />,document.querySelector('#app'))
+        // console.log(Head);
+
+
+        //state props  有状态组件
+    </script>
+</body>
+</html>

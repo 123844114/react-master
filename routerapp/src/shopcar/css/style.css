@@ -1,0 +1,25 @@
+*{
+    padding:0;
+    margin: 0;
+    list-style: none;
+}
+
+.shopbox .checkbtn{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.shopbox .checkbtn.active{
+    background: red;
+}
+.shopbox div{
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.shopbox>div{
+    border-bottom: 1px solid transparent;
+}

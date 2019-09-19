@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="js/babel.js"></script>
+    <script type="text/babel">
+        class Wrap extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    title:this.props.name
+                }
+            }
+            render(){
+                console.log('wrap-----render');
+                return <div className="wrap" style={{background:'skyblue',color:'#fff'}}>
+                        wrap
+                        <p>{this.props.name}</p>
+                        <p>{this.state.title}</p>
+                    </div>
+            }
+            //组件将要接受props变化
+            componentWillReceiveProps(nextProps){
+                console.log('wrap----componentWillReceiveProps')
+                console.log(nextProps);
+            }
+            shouldComponentUpdate(nextProps,nextState){
+                console.log('wrap---shouldComponentUpdate');
+                return true;
+            }
+            componentWillUnmount(){
+                console.log('componentWillUnmount');
+            }
+        }
+    
+        class Container extends React.Component{
+            //组件被创建时首先执行constructor 1次
+            //可以接受props 可以定义state
+            constructor(props){
+                console.log('constructor');
+                super(props);
+                this.state = {
+                    name:'1610A',
+                    open:true
+                }
+            }
+            //组件被创建时 1次 可以重新设置state
+            componentWillMount(){
+                console.log('componentWillMount');
+                console.log(this.refs.container);  //组件实例
+            }
+            render(){ //渲染真实dom节点 react diff算法 比较最小差异
+                console.log('render');
+                return <div className="container" ref="container">
+                        <div style={{background:'red',color:'#fff'}}>
+                            container
+                            <p>{this.state.name}</p>
+                            <button onClick={()=>{
+                                this.setState({name:'aaa'})
+                            }}>setname</button>
+                            <button onClick={()=>{
+                                this.setState({open:false});
+                            }}>卸载</button>
+                        </div>
+                        {this.state.open ? <Wrap name={this.state.name}/> : <div></div>}
+                    </div>
+            }
+            //初始化dom节点已经创建完成 1次
+            componentDidMount() {
+                console.log('componentDidMount');
+                console.log(this.refs.container);
+                console.log('出生阶段结束');
+            }
+            //组件状态发生改变应该更新组件
+            //在没有定义时默认返回true
+            //必须要设置return true 往下执行更新 false终止更新
+            shouldComponentUpdate(nextProps,nextState){
+                console.log('shouldComponentUpdate');
+                console.log(nextProps,nextState);
+                return true;
+            }
+            //将要更新组件
+            componentWillUpdate(nextProps,nextState){
+                console.log('componentWillUpdate');
+                console.log(nextProps,nextState);
+            } 
+            //组件更新完成
+            componentDidUpdate(prevProps,prevState){
+                console.log('componentDidUpdate');
+                console.log(prevProps,prevState)
+            }
+        }
+
+        ReactDOM.render(<Container a={'aaa'}/>,document.querySelector('#app'));
+    
+    
+    
+    </script>
+</body>
+</html>

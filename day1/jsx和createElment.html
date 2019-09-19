@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap"></div>
+    <div id="app"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        //react react方法集成包 Component
+        //reactDOM渲染元素相关的一些方法
+        const li = React.createElement('li',{
+            key:1
+        },['1']);
+        const ul = React.createElement('ul',{className:'list'},[li]);
+        //<ul><li>1</li></ul>
+        //React.createElement(tag,props,children)
+        //返回值：react元素  虚拟dom
+        const lis = ['1','2','3','4','5'];
+        const ul1 = <ul className="list">{
+            lis.map((item,i)=><li key={i}>{item}</li>) 
+        }</ul>;
+        console.log(ul);
+        console.log(ul1);
+
+        ReactDOM.render(ul,document.querySelector('#wrap'));
+        ReactDOM.render(ul1,document.querySelector('#app'));
+        //ReactDOM.render(react元素/组件,父元素)
+
+
+
+        
+
+    </script>
+</body>
+</html>

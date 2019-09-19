@@ -1,0 +1,14 @@
+.radio{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    border:1px solid #000;
+    margin-right: 10px;
+}
+.radio.active{
+    background: orange;
+}
+.radio.successActive{
+    background: green;
+}

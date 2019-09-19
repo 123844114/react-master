@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        let topdata = {
+            title:'录制屏幕',
+            content:[{
+                text:'窗口/对象a',
+                flag:false
+            },{
+                text:'矩形区域a',
+                flag:true
+            },{
+                text:'全屏录制a',
+                flag:true
+            }],
+            titleflag:true
+        }
+
+        let bottomdata = {
+            title:'录制音频',
+            forms:{
+                label:'请输入ip地址',
+                type:'text'
+            },
+            sections:[
+                {
+                    text:'麦克风'
+                },
+                {
+                    text:'系统声音'
+                }
+            ]
+        }
+
+        let btns = ['录制','编辑','选项'];
+
+        let data = {
+            btns,bottomdata,topdata
+        }
+
+        let title={
+            fontSize:16,
+            width:200,
+            height:45,
+            lineHeight:'45px'
+        }
+        //遇见<开始解析jsx></停止解析>
+        //遇见{开始解析js}
+        //{/* 注释 */}
+        //state 
+        let topDom = <div className="topbox">
+                {topdata.titleflag && <h2 style={title}>{topdata.title}</h2>}
+                <ul>
+                    {
+                        topdata.content.map((item,i)=>{
+                            let text = item.text.replace('a','');
+                            return item.flag && <li key={i}>{text}</li>
+                        })
+                    }
+                    {/* <li>{topdata.content[0].text}</li> */}
+                </ul>
+            </div>;
+        let bottomDom = <div className="bottombox">
+                <h2>{bottomdata.title}</h2>
+                <form>
+                    <label htmlFor="aa">{bottomdata.forms.label}</label>
+                    <input type={bottomdata.forms.type} id="aa"/>
+                    <select>
+                        {
+                            bottomdata.sections.map((item,i)=><option key={i}>{item.text}</option>)
+                        }
+                    </select>
+                </form>
+            </div>
+        
+        let contentDom = <div>
+              {topDom}
+              {bottomDom}
+              <div>
+                {
+                    btns.map((item,i)=><button key={i}>{item}</button>) 
+                }
+              </div>
+            </div>;
+        
+        ReactDOM.render(contentDom,document.querySelector('#wrap'));
+    </script>
+</body>
+</html>

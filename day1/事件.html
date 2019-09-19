@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .index{
+            padding:20px;
+            border: 1px solid #000;
+            background: #eee;
+            width: 840px;
+            height: 840px;
+        }
+        .one{
+            width: 800px;
+            height: 800px;
+            background: red;
+        }
+        .two{
+            width: 400px;
+            height: 400px;
+            background: skyblue;
+        }
+        .three{
+            width: 200px;
+            height: 200px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="root"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        class Index extends React.Component{
+            render(){
+                return <div className="index">
+                        <div className="one" ref={dom=>this.one=dom} onClick={(e)=>{
+                            e.stopPropagation();
+                        }}>one
+                            <div className="two" ref={dom=>this.two=dom}>two
+                                <div className="three" ref={dom=>this.three=dom}>three</div>
+                            </div>
+                        </div>
+                    </div>
+            }
+            componentDidMount() {
+                //react合成事件所有的都是给document对象绑定的时候，使用事件委托来实现的
+
+                // this.one.addEventListener('click',()=>{
+                //     console.log('one')
+                // },true);
+                // this.two.addEventListener('click',(e)=>{
+                //     // e.stopPropagation(); 
+                //     console.log('two')
+                // },true);
+                // this.three.addEventListener('click',(e)=>{
+                //     // e.stopPropagation();
+                //     console.log('three')
+                // },true);
+            }   
+        }
+        
+        ReactDOM.render(<Index />,document.querySelector('.root'));
+    
+    </script>
+</body>
+</html>

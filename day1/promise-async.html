@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50%;
+            transition: transform 0.5s ;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <button id="wbtn">按w运行</button>
+    <button id="zbtn">按z运行</button>
+    <script>
+        class RouteTransition{
+            //补全代码
+            constructor(box,arr){
+                this.box = document.querySelector(box);
+                this.arr = arr;
+                this.resolve = null;
+                this.moveEnd();
+                this.start().then(()=>{
+                    this.endCallback();
+                })
+            }
+            moveEnd(){
+                this.box.addEventListener('transitionend',()=>{
+                    this.resolve && this.resolve();
+                })
+            }
+            move(x,y){
+                return new Promise((resolve,reject)=>{
+                    this.box.style.transform = `translate(${x}px,${y}px)`;
+                    this.resolve = resolve;
+                })
+            }
+            async start(){
+                for(let val of this.arr){  
+                   await this.move(val.x,val.y);
+                }
+            }
+            end(ck){
+                this.endCallback = ck;
+            }
+        }
+        wbtn.onclick = function(){
+            let ani = new RouteTransition('.box',[
+                {
+                    x:0,y:0
+                },
+                {
+                    x:40,y:100
+                },
+                {
+                    x:80,y:0
+                },
+                {
+                    x:120,y:100
+                },
+                {
+                    x:160,y:0
+                }
+            ])
+            ani.end(()=>{
+                //运行完触发
+                alert('end');
+            })
+        }
+        
+        
+    </script>
+</body>
+</html>

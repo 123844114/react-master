@@ -1,0 +1,18 @@
+出生 
+constructor 1 
+static getDerivedStateFromProps  
+render
+componentDidMount 1 发起ajax 
+ 
+成长
+state变化  props变化
+
+static getDerivedStateFromProps  
+shouldComponentUpdate
+render
+getSnapshotBeforeUpdate  Snapshot快照
+componentDidUpdate
+
+
+死亡
+componentWillUnmount

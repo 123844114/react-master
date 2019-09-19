@@ -1,0 +1,14 @@
+[
+    {
+        "brand":"大众",
+        "brandId":"1" 
+    },
+    {
+        "brand":"奥迪",
+        "brandId":"2" 
+    },
+    {
+        "brand":"五菱",
+        "brandId":"3"
+    }
+]

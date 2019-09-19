@@ -1,0 +1,26 @@
+export default [
+    {
+        id:0,
+        title:'页面1'
+    },
+    {
+        id:1,
+        title:'页面2'
+    },
+    {
+        id:2,
+        title:'页面3',   
+        children:[
+            {
+                id:'2-0',
+                title:'页面3的子页面',
+                children:[
+                    {
+                        id:'2-0-1',
+                        title:'页面3的孙子页面'
+                    }
+                ]
+            }
+        ]
+    }
+]

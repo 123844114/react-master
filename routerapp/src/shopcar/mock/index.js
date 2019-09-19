@@ -1,0 +1,52 @@
+import Mock from 'mockjs';
+
+Mock.mock('/api/shopcar',{
+    car:{
+        allCheck:false,
+        allPrice:0,
+        group:[
+            {
+                title:'宜家',
+                groupCheck:false,
+                list:[
+                    {
+                        title:'水杯',
+                        price:50,
+                        itemCount:1,
+                        itemCheck:true
+                    },
+                    {
+                        title:'沙发',
+                        price:1000,
+                        itemCount:1,
+                        itemCheck:false
+                    },
+                    {
+                        title:'电视',
+                        price:1500,
+                        itemCount:1,
+                        itemCheck:false
+                    }
+                ]
+            },
+            {
+                title:'食品',
+                groupCheck:false,
+                list:[
+                    {
+                        title:'包子',
+                        price:3,
+                        itemCount:1,
+                        itemCheck:false
+                    },
+                    {
+                        title:'鸡蛋',
+                        price:3.5,
+                        itemCount:1,
+                        itemCheck:false
+                    }
+                ]
+            }
+        ]
+    }
+})

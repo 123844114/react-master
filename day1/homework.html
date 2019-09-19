@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        class Box extends React.Component{
+            state = {
+                list: {
+                        type: 'ul',
+                        props: {
+                            id: 'ul'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: '一级_1',
+                                props: {
+                                    id: 'li'
+                                },
+                                children: [
+                                    {
+                                        type: 'div',
+                                        name: '二级_1',
+                                        children: [
+                                            {
+                                                type: 'div',
+                                                name: '三级_1'
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'li',
+                                name: '一级_2',
+                                props: {
+                                    id: 'li'
+                                },
+                                children: [
+                                    {
+                                        type: 'div',
+                                        name: '二级_2'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+            }
+            setDom(data){
+                return React.createElement(data.type,{...data.props},data.children ? data.children.map((item,i)=>[data.name,this.setDom(item)]).flat() : data.name)
+            }
+            render(){
+                return this.setDom(this.state.list);
+            }
+        }
+
+        ReactDOM.render(<Box/>,document.querySelector('#app'))
+    </script>
+</body>
+</html>

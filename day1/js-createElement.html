@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script>
+        
+
+        function createElement(tag,props={},children=[]){
+            return {
+                tag,
+                props,
+                children
+            }
+        }
+        //{tag:'li',props:{class:lis},children:['hello']}
+        
+
+        //Virtual DOM 虚拟dom
+        //描述dom节点的对象
+        let span = createElement('span',{},['world'])
+        let li = createElement('li',{class:'lis'},['hello',span])
+        let ul = createElement('ul',{class:'list',style:{
+            width:'100px',
+            heigth:'100px'
+        }},[li,'23']);
+        // console.log(ul);
+
+
+        function render(vNode,parent){
+            //<ul><li>hello<span>world</span></li>23</ul>
+            function getEl(vNode){
+                //先解构
+                let {tag,props,children} = vNode;
+                //创建元素
+                let el = document.createElement(tag);
+                Object.entries(props).map(item=>{
+                    let [key,value] = item;
+                    if(typeof value==='object'){
+                        el.setAttribute(key,Object.entries(value).map(v=>`${v[0]}:${v[1]}`).join(';'))
+                        //'width:100px;height:100px'
+                    }else{
+                        el.setAttribute(key,value)
+                    }
+                })
+                if(children.length){
+                    children.forEach(item=>{
+                        if(typeof item === 'string'){
+                            el.appendChild(document.createTextNode(item));
+                        }else{
+                            el.appendChild(getEl(item));
+                        }
+                    })
+                }
+                return el;
+            }
+            parent.appendChild(getEl(vNode));
+        }
+        render(ul,document.querySelector('#wrap'));
+
+
+        
+    </script>
+</body>
+</html>

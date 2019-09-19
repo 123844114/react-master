@@ -1,0 +1,36 @@
+*{
+    padding:0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.zoombox{
+    border:1px solid #000;
+    position: relative;
+}
+.zoombox img{
+    width: 100%;
+    height: 100%;
+}
+
+.zoomMark{
+    position: absolute;
+    z-index: 10;
+    background: rgba(0,0,0,.6);
+}
+
+.zoomBig{
+    position: absolute;
+    border:1px solid #000;
+    top:0;
+}
+
+.tablebox ul,.tablebox li{
+    display: inline-block;
+}
+.tablebox li{
+    width: 78px;
+    height: 78px;
+    border:2px solid transparent;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        let {Component} = React;
+        class House extends Component{
+            render(){
+                return <div className="house">
+                    house
+                    <Room />
+                    <BathRoom />
+                </div>
+            }
+        }
+        
+        class Room extends Component{
+            render(){
+                return <div className="room">
+                    room
+                    <Man />
+                    <Dog />
+                    <Dog />
+                </div>
+            }
+        }
+        class Man extends Component{
+            render(){
+                return <div className="man">
+                    man
+                </div>
+            }
+        }
+        class Dog extends Component{
+            render(){
+                return <div className="dog">
+                    dog
+                </div>
+            }
+        }
+        class BathRoom extends Component{
+            render(){
+                return <div className="bathRoom">
+                    bathroom
+                </div>
+            }
+        }
+
+        let {render} = ReactDOM;
+
+
+        const title = <h1 className="title">scriptOj</h1>
+        const page = <div className="content">{title}</div>
+
+        render(page,document.querySelector('#app'))
+    </script>
+</body>
+</html>

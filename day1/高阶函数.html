@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="root"></div>
+    <script src="./js/react.js"></script>
+    <script src="./js/reactdom.js"></script>
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    //
+        function connect(ck) {
+            const person = {
+                'zjc':{
+                    sex:'男',
+                    age:20,
+                    name:'张金城'
+                },
+                'dyd':{
+                    sex:'男',
+                    age:19,
+                    name:'窦永铎'
+                }
+            }
+            let obj = ck(person);
+            return (Com)=>{
+                return class extends React.Component{
+                    render(){
+                        return <div>
+                                <Com data={obj}/>
+                            </div>
+                    }
+                }
+            }
+        }
+        class Zjc extends React.Component{
+            render(){
+                let {data} = this.props;
+                //data打印出来张金城的数据
+                console.log(data);
+                return <div>
+                    
+                    </div>
+            }
+        } 
+        class Dyd extends React.Component{
+            render(){
+                let {data} = this.props;
+                //data打印出来dyd的数据
+                console.log(data);
+                return <div>
+                    
+                    </div>
+            }
+        } 
+        //class let const function import 
+        console.log(Zjc);
+        let Person1 = connect((data)=>{
+            return data['dyd']
+        })(Dyd);
+        
+        ReactDOM.render(<Person1 />,document.querySelector('.root'))
+
+        // connect((data)=>{
+        //     return data['dyd']
+        // })();
+    </script>
+
+
+    <script>
+    
+        function connect(){
+            const data = {
+                '1610A':['李仁鹏','王璐','晓圆'],
+                '1610C':['管悦','祁珈劼'],
+                '1701C':['学委','班长']
+            }
+            return ()=>{
+                return class extends React.Component{
+
+                }
+            }
+        }
+        class A extends React.Component{
+            render(){
+                let {data} = this.props;
+                console.log(data)  //['李仁鹏','王璐','晓圆']
+                return <div>
+
+                    </div>
+            }
+        }
+        connect()();
+
+
+    
+    
+    
+    </script>
+</body>
+</html>

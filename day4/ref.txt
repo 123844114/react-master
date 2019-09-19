@@ -1,0 +1,10 @@
+ref 获取真实dom节点
+
+ref的值为字符串或函数
+
+ref的值为字符串在refs对象中添加该属性存放真实dom节点或组件实例
+ref的值为函数时当state状态发生变化会触发该函数，函数接受的参数就是真实dom节点或组件实例
+
+ReactDOM.findDomNode
+
+ReactDOM.unmountComponentAtNode(根节点)
